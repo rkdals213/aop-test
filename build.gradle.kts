@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.ir.backend.js.compile
 
 plugins {
     id("org.springframework.boot") version "3.2.4"
@@ -23,10 +22,18 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("io.ktor:ktor-client-okhttp-jvm:2.3.9")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
     // feign
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:4.1.0")
+
+    // ktor-client-core-jvm
+    implementation("io.ktor:ktor-client-core:2.3.9")
+    implementation("io.ktor:ktor-client-okhttp:2.3.9")
+    implementation("io.ktor:ktor-client-content-negotiation:2.3.9")
+    implementation("io.ktor:ktor-serialization-jackson:2.3.9")
+
 }
 
 tasks.withType<KotlinCompile> {

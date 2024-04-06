@@ -1,8 +1,8 @@
-package com.example.aoptest.feign
+package com.example.aoptest.http.feign
 
 import com.example.aoptest.defaultObjectMapper
-import com.example.aoptest.response.ApiException
-import com.example.aoptest.response.ErrorResponse
+import com.example.aoptest.http.ApiException
+import com.example.aoptest.http.ErrorResponse
 import feign.Response
 import feign.codec.ErrorDecoder
 import org.springframework.context.annotation.Bean
@@ -22,6 +22,7 @@ class FeignClientErrorDecoder : ErrorDecoder {
         val failure = parse(response)
 
         failure?.let {
+            println("error decoder : $failure")
             return ApiException(it)
         }
 

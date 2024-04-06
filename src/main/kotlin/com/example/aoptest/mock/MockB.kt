@@ -1,8 +1,7 @@
 package com.example.aoptest.mock
 
 import com.example.aoptest.logger
-import com.example.aoptest.response.ApiException
-import com.example.aoptest.response.ErrorResponse
+import com.example.aoptest.http.ErrorResponse
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -14,17 +13,18 @@ import org.springframework.web.bind.annotation.RestController
 class MockBController {
 
     @PostMapping
-    fun function1(@RequestBody request: Request): ResponseEntity<Response> {
+    fun function1(@RequestBody request: Request): ResponseEntity<Any> {
         logger.info("mock b start : id = ${request.id}")
 
         if (request.id == 3L) {
-            throw ApiException(
-                ErrorResponse(
-                    message = "mock-b exception",
-                    code = "BBBB",
-                    status = 500
+            return ResponseEntity.status(400)
+                .body(
+                    ErrorResponse(
+                        message = "mock-b exception",
+                        code = "BBBB",
+                        status = 500
+                    )
                 )
-            )
         }
 
         return ResponseEntity.ok().body(Response("Mock B"))

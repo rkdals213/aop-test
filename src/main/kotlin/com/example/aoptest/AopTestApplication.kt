@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.openfeign.EnableFeignClients
+import java.time.format.DateTimeFormatter
 
 @SpringBootApplication
 @EnableFeignClients
@@ -19,3 +20,4 @@ fun main(args: Array<String>) {
 
 val logger: Logger = LoggerFactory.getLogger(AopTestApplication::class.java)
 val defaultObjectMapper: ObjectMapper = jsonMapper { addModule(kotlinModule()) }
+val dateTimeFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")

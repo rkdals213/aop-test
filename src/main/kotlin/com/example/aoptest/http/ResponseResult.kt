@@ -1,4 +1,4 @@
-package com.example.aoptest.response
+package com.example.aoptest.http
 
 sealed class ResponseResult<out T> {
 

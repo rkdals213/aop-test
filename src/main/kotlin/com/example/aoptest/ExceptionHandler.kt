@@ -1,7 +1,7 @@
 package com.example.aoptest
 
-import com.example.aoptest.response.ApiException
-import com.example.aoptest.response.ErrorResponse
+import com.example.aoptest.http.ApiException
+import com.example.aoptest.http.ErrorResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler

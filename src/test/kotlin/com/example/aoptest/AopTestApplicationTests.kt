@@ -1,7 +1,16 @@
 package com.example.aoptest
 
 import com.example.aoptest.main.MainController
-import com.example.aoptest.response.ApiException
+import com.example.aoptest.mock.MockAController
+import com.example.aoptest.http.ApiException
+import io.ktor.client.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.serialization.jackson.*
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
@@ -34,7 +43,41 @@ class AopTestApplicationTests @Autowired constructor(
             mainController.function1(MainController.Request(3L))
         }
 
-        println(apiException.errorResponse)
+        println("result : " + apiException.errorResponse)
+    }
+
+    @Test
+    fun test() {
+        val httpClient = HttpClient {
+            install(ContentNegotiation) {
+                jackson()
+            }
+        }
+
+        runBlocking {
+            async {
+                httpClient.request {
+                    contentType(type = ContentType.Application.Json)
+                    method = HttpMethod.Post
+                    host = "localhost:8080/main/function1"
+                    setBody(MockAController.Request(id = 1L))
+                }.apply {
+                    println(bodyAsText())
+                }
+            }
+            async {
+                httpClient.request {
+                    contentType(type = ContentType.Application.Json)
+                    method = HttpMethod.Post
+                    host = "localhost:8080/main/function1"
+                    setBody(MockAController.Request(id = 2L))
+                }.apply {
+                    println(bodyAsText())
+                }
+            }
+
+        }
+
     }
 
 }
