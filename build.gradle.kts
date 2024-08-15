@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("io.ktor:ktor-client-okhttp-jvm:2.3.9")
@@ -33,7 +34,6 @@ dependencies {
     implementation("io.ktor:ktor-client-okhttp:2.3.9")
     implementation("io.ktor:ktor-client-content-negotiation:2.3.9")
     implementation("io.ktor:ktor-serialization-jackson:2.3.9")
-
 }
 
 tasks.withType<KotlinCompile> {
